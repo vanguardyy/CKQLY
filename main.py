@@ -58,9 +58,7 @@ def get_weather(region):
     # 风向
     wind_dir = response["daily"][0]["windDirDay"]
     # 天气
-    weather_ur2 = "https://api.qweather.com/v7/weather/now?location={}&key={}".format(location_id, key)
-    response = get(weather_ur2, headers=headers).json()
-    weather = response["now"]["text"]
+    weather = response["daily"][0]["textDay"]
     return weather, temp, tempn, wind_dir
  
  
