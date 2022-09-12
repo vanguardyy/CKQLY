@@ -53,12 +53,14 @@ def get_weather(region):
     weather_url = "https://devapi.qweather.com/v7/weather/now?location={}&key={}".format(location_id, key)
     response = get(weather_url, headers=headers).json()
     # 天气
-    weather = response["now"]["text"]
+    weatherD = response["daily"]["textDay"]
+    weatherN = response["daily"]["textNight"]
     # 当前温度
-    temp = response["now"]["temp"] + u"\N{DEGREE SIGN}" + "C"
+    temp = response["daily"]["tempMax"] + u"\N{DEGREE SIGN}" + "C"
+    tempn = response["daily"]["tempMin"] + u"\N{DEGREE SIGN}" + "C"
     # 风向
-    wind_dir = response["now"]["windDir"]
-    return weather, temp, wind_dir
+    wind_dir = response["daily"]["windDirDay"]
+    return weatherD, weatherN, temp, tempn, wind_dir
  
  
 def get_birthday(birthday, year, today):
@@ -115,7 +117,7 @@ def get_ciba():
     return note_ch, note_en
  
  
-def send_message(to_user, access_token, region_name, weather, temp, wind_dir, note_ch, note_en):
+def send_message(to_user, access_token, region_name, weatherD,weatherN, temp, tempn,wind_dir, note_ch, note_en):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={}".format(access_token)
     week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
     year = localtime().tm_year
@@ -149,12 +151,20 @@ def send_message(to_user, access_token, region_name, weather, temp, wind_dir, no
                 "value": region_name,
                 "color": get_color()
             },
-            "weather": {
-                "value": weather,
+            "weatherD": {
+                "value": weatherD,
+                "color": get_color()
+            },
+            "weatherN": {
+                "value": weatherN,
                 "color": get_color()
             },
             "temp": {
                 "value": temp,
+                "color": get_color()
+            },
+             "temp": {
+                "value": tempn,
                 "color": get_color()
             },
             "wind_dir": {
