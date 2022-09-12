@@ -53,10 +53,10 @@ def get_weather(region):
     weather_url = "https://devapi.qweather.com/v7/weather/3d?location={}&key={}".format(location_id, key)
     response = get(weather_url, headers=headers).json()
     # 当前温度
-    temp = response["daily"]["tempMax"][0] + u"\N{DEGREE SIGN}" + "C"
-    tempn = response["daily"]["tempMin"][0] + u"\N{DEGREE SIGN}" + "C"
+    temp = response["daily"][0]["tempMax"] + u"\N{DEGREE SIGN}" + "C"
+    tempn = response["daily"][0]["tempMin"] + u"\N{DEGREE SIGN}" + "C"
     # 风向
-    wind_dir = response["daily"]["windDirDay"][0]
+    wind_dir = response["daily"][0]["windDirDay"]
     # 天气
     weather_url = "https://api.qweather.com/v7/weather/now?location={}&key={}".format(location_id, key)
     response = get(weather_ur2, headers=headers).json()
