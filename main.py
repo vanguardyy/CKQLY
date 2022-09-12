@@ -163,7 +163,7 @@ def send_message(to_user, access_token, region_name, weatherD,weatherN, temp, te
                 "value": temp,
                 "color": get_color()
             },
-             "temp": {
+            "tempn": {
                 "value": tempn,
                 "color": get_color()
             },
