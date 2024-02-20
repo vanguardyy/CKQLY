@@ -231,7 +231,7 @@ if __name__ == "__main__":
     note_en = config["note_en"]
     if note_ch == "" and note_en == "":
         # 获取词霸每日金句
-        note_ch, note_en = 我对你的爱永远不会消失,谢谢你陪我走了这么远
+        note_ch, note_en = 希望我的宝宝工作顺利，天天快乐！<(￣︶￣)↗[GO!]
     # 公众号推送消息
     for user in users:
         send_message(user, accessToken, region, weather, temp, tempn, wind_dir, note_ch, note_en)
